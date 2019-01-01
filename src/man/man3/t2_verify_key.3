@@ -1,0 +1,84 @@
+.\" MIT License
+.\"
+.\" Copyright (c) 2018-2019 Davidson Francis <davidsondfgl@gmail.com>
+.\"
+.\" Permission is hereby granted, free of charge, to any person obtaining a copy
+.\" of this software and associated documentation files (the "Software"), to deal
+.\" in the Software without restriction, including without limitation the rights
+.\" to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+.\" copies of the Software, and to permit persons to whom the Software is
+.\" furnished to do so, subject to the following conditions:
+.\" 
+.\" The above copyright notice and this permission notice shall be included in all
+.\" copies or substantial portions of the Software.
+.\" 
+.\" THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+.\" IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+.\" FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+.\" AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+.\" LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+.\" OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+.\" SOFTWARE.
+.\"
+.TH man 3 "01 Jan 2019" "1.0" "tiny2fa man page"
+.SH NAME
+t2_verify_key \- Verifies a given base32 secret key through the key provided
+and a certain window.
+.SH SYNOPSIS
+.nf
+.B #include <tiny2fa.h>
+.sp
+.BI "int t2_verify_key(const uint8_t " *b32_secret_key ", int " key ", int " window ");
+.fi
+.SH DESCRIPTION
+.BR t2_verify_key ()
+verifies if the given
+.I secret_key
+and
+.I key
+is valid through a specific
+.I window
+time.
+Note that the
+.I window
+must be an odd number and it represents how much time the algorithm will
+consider your key as valid. For instance, a
+.I window
+value = 3 means that the algorithm will accepts key until 1 minute, in the past
+or in the future.
+
+If the
+.I window
+value is 0, the algorithm will use the default window, 3.
+
+.SH RETURN VALUE
+Returns 1 if the key is valid and 0 otherwise.
+.SH EXAMPLE
+.nf
+#include <stdio.h>
+#include <tiny2fa.h>
+
+int main(void)
+{
+	int key;
+
+	/* key in base32 with 32 digits. */
+	const uint8_t b32_sk[T2_KEY_ENCODED_LENGTH + 1] =
+		"A3WPD3B2SK5UNYCY7AI7ZMICC2LGDXQO";
+	
+	/* Current key. */
+	key = t2_get_key(sk, 0);
+	printf("Generated key: %06d\\n", key);
+
+	if (t2_verify_key(sk, key, 0))
+		printf("Your key is valid!\\n");
+	else
+		printf("Your key is false\\n");
+
+	return (0);
+}
+.SH SEE ALSO
+.BR t2_get_key (3),
+.BR t2_generate_key (3)
+.SH AUTHOR
+Davidson Francis (davidsondfgl@gmail.com)
