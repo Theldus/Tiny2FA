@@ -1,3 +1,39 @@
+/*
+ * MIT License
+ *
+ * Copyright (c) 2018 Davidson Francis <davidsondfgl@gmail.com>
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ *
+ *
+ *
+ * This file previously have made use of the function 'explicit_bzero', provided
+ * from the file util.c/util.h in order to avoid GCC optimizations in the
+ * function.
+ * 
+ * Since util.c makes use of a header not present in the original project
+ * (config.h), I've intentionally excluded the use of util.h and replaced the
+ * function for the original 'bzero', present in the default C library.
+ *
+ * The previous authors terms are included below:
+ */
+
 // HMAC_SHA1 implementation
 //
 // Copyright 2010 Google Inc.
@@ -16,10 +52,10 @@
 // limitations under the License.
 
 #include <string.h>
+#include <strings.h>
 
 #include "hmac.h"
 #include "sha1.h"
-#include "util.h"
 
 void hmac_sha1(const uint8_t *key, int keyLength,
                const uint8_t *data, int dataLength,
@@ -74,7 +110,7 @@ void hmac_sha1(const uint8_t *key, int keyLength,
   memcpy(result, sha, resultLength);
 
   // Zero out all internal data structures
-  explicit_bzero(hashed_key, sizeof(hashed_key));
-  explicit_bzero(sha, sizeof(sha));
-  explicit_bzero(tmp_key, sizeof(tmp_key));
+  bzero(hashed_key, sizeof(hashed_key));
+  bzero(sha, sizeof(sha));
+  bzero(tmp_key, sizeof(tmp_key));
 }
