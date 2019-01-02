@@ -27,7 +27,7 @@
 
 	#include <stdint.h>
 
-	/* Secrete key size, in bytes. */
+	/* Secret key size, in bytes. */
 	#define T2_SECRET_KEY_SIZE 20
 	
 	/* Time padded size, in bytes. */

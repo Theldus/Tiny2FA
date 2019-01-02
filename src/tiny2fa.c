@@ -44,8 +44,8 @@
  */
 void t2_generate_secret_key(uint8_t *secret_key)
 {
-	uint8_t bin_sk[T2_SECRET_KEY_SIZE]; /* Binary secrete key. */
-	int fd;                          /* File descriptor.    */
+	uint8_t bin_sk[T2_SECRET_KEY_SIZE]; /* Binary secret key. */
+	int fd;                             /* File descriptor.    */
 	
 	fd = open("/dev/urandom", O_RDONLY);
 	

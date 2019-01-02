@@ -32,7 +32,7 @@
 /* Program state. */
 #define STATE_READ_ARGS            1
 #define STATE_GET_KEY              2
-#define STATE_GENERATE_SECRETE_KEY 3
+#define STATE_GENERATE_SECRET_KEY  3
 #define STATE_VERIFY_KEY_STEP1     4
 #define STATE_VERIFY_KEY_STEP2     5
 #define STATE_WINDOW               6
@@ -232,7 +232,7 @@ void readargs(int argc, char **argv)
 
 			else if (!strcmp(arg, "-g") || !strcmp(arg, "--generate-secret-key"))
 			{
-				state = STATE_GENERATE_SECRETE_KEY;
+				state = STATE_GENERATE_SECRET_KEY;
 				generate_sk();
 				break;
 			}
@@ -258,7 +258,7 @@ void readargs(int argc, char **argv)
 
 		/**
 		 * Get key state, the first argument after get-key
-		 * should be the secrete-key, so lets read.
+		 * should be the secret-key, so lets read.
 		 */
 		else if (state == STATE_GET_KEY)
 		{
