@@ -24,7 +24,7 @@ CC=gcc
 AR=ar
 INCLUDE       = $(CURDIR)/include
 INCLUDE_LIBS  = $(INCLUDE)/google_pam
-CFLAGS        = -Wall -Werror
+CFLAGS        = -Wall -Wextra -Werror -Wpedantic
 CFLAGS       += -I $(INCLUDE_LIBS) -I $(INCLUDE) -std=c99
 ARFLAGS       = cru
 LIB           = lib2fa.a

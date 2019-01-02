@@ -94,7 +94,7 @@ int t2_get_key(const uint8_t *b32_secret_key, uint64_t tm)
 	int result;                            /* Result.                   */
 
 	/* Time. */
-	ctime  = (tm != 0) ? tm : time(NULL);
+	ctime  = (tm != 0) ? tm : (uint64_t) time(NULL);
 	ctime /= T2_KEY_INTERVAL;
 
 	/* Decode secret-key. */

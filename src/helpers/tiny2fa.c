@@ -26,6 +26,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
+#include <inttypes.h>
 #include <tiny2fa.h>
 
 /* Program state. */
@@ -104,10 +105,10 @@ void get_key(void)
 
 		/* Calculates the keys through multiple windows. */
 		offset = -((args.window-1)/2);
-		for (int i = 0; i < args.window; i++)
+		for (unsigned i = 0; i < args.window; i++)
 		{
 			uint64_t iter_time = tm + (offset * T2_KEY_INTERVAL);
-			printf("W #%d: %06d - time: %lu\n", i,
+			printf("W #%d: %06d - time: %" PRIu64 "\n", i,
 				t2_get_key(args.sk, iter_time), iter_time);
 			
 			offset++;

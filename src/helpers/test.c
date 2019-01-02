@@ -24,6 +24,7 @@
 
 #include <stdio.h>
 #include <time.h>
+#include <inttypes.h>
 #include <tiny2fa.h>
 
 /* Constant base32 key. */
@@ -37,11 +38,14 @@ const int correctCodes[] = {948759, 327634, 763856};
 
 int main(int argc, char *argv[])
 {
+	((void)argc);
+	((void)argv);
+
 	int results[3];
 
 	printf("\n ~~~~~~~~~~~~~~~~ Tiny2FA Tester ~~~~~~~~~~~~~~~~\n");
 	printf("Using Secret-Key: %s\n", b32_sk);
-	printf("Using time: %lu\n\n", tm);
+	printf("Using time: %" PRIu64 "\n\n", tm);
 
 	/* Tests get_key. */
 	printf("Checking get_key\n");
