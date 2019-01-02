@@ -1,7 +1,7 @@
-## Tiny2FA [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
+# Tiny2FA [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 A small C library that implements TOTP, compatible with Google Authenticator
 
-### Library
+## Library
 Tiny2FA is a small C library that implements TOTP. The project was mainly based in the
 [google-authenticator-libpam](https://github.com/google/google-authenticator-libpam/blob/master/src/pam_google_authenticator.c)
 project and a nice tutorial found [here](https://www.codementor.io/slavko/google-two-step-authentication-otp-generation-du1082vho).
@@ -11,7 +11,7 @@ few functions, without much to think about.
 The library is capable of generating secret-keys, generate 6-digit code and verify the validity of the entered code.
 It's also possible to adjust time-stamps and window time-slice.
 
-### Usage
+## Usage
 All the core is divided into just 3 functions: `t2_generate_secret_key`, `t2_get_key` and `t2_verify_key`:
 ```c
 void t2_generate_secret_key(uint8_t *secret_key);
@@ -35,7 +35,7 @@ verifier will consider your code. Actually the time is always 30 seconds, but a 
 to generate keys in the future and in the past (in steps of 30s) in order to find the key that the other device
 have generated.
 
-#### Example
+### Example
 ```c
 /* Build with: gcc program.c -o program -l2fa, no magic. */
 #include <stdio.h>
@@ -70,7 +70,7 @@ int main()
 For more info, read the man pages available and in the latter case, the source (tiny2fa.{c,h}), I think it's simple
 enough for anyone read, ;-). I also encourage you to create issues if desired.
 
-### Program
+## Program
 In addition to the library, the project also features a program with the same name that handles 2FA/TOTP in many ways,
 both to show library usage and to allow library use without the need to write programs, choose the most convenient.
 ```
@@ -95,7 +95,7 @@ Options:
 ```
 So Tiny2FA can also be useful for scripts languages, ;-).
 
-### Installing/Building
+## Installing/Building
 Tiny2FA is written in ISO C and just requires that the target system have the LIB C available; maybe the makefile
 is somehow limited to Unix-like systems but still very capable to build in other environments. If you're facing
 issues with this, contact me.
@@ -106,7 +106,7 @@ $ cd src/
 $ make all
 $ sudo make install
 ```
-### License
+## License
 Tiny2FA is licensed under the MIT License, but this project also contains parts of 'google-authenticator-libpam'
 project that is licensed under Apache v2 license. See [caf80cf](https://github.com/Theldus/Tiny2FA/commit/caf80cf86ec2760b55da44cee37b309e6810cb7a)
 and [here](https://github.com/Theldus/Tiny2FA/tree/master/src/include/google_pam) for more details.
