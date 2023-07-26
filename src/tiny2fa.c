@@ -9,10 +9,10 @@
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be included in all
  * copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -46,27 +46,28 @@ void t2_generate_secret_key(uint8_t *secret_key)
 {
 	uint8_t bin_sk[T2_SECRET_KEY_SIZE]; /* Binary secret key. */
 	int fd;                             /* File descriptor.    */
-	
+
 	fd = open("/dev/urandom", O_RDONLY);
-	
+
 	/**
 	 * If fail, maybe means that we're not using a Linux system?
 	 * anyways, lets use a less secure algorithm...
 	 */
 	if (fd < 0)
 	{
-		srand(time(NULL)); 
+		srand(time(NULL));
 		for (int i = 0; i < T2_SECRET_KEY_SIZE; i++)
 			bin_sk[i] = rand() & 0xFF;
 	}
 	else
+	{
 		read(fd, bin_sk, T2_SECRET_KEY_SIZE);
+		close(fd);
+	}
 
 	/* Generates a base32 of the key. */
 	base32_encode(bin_sk, T2_SECRET_KEY_SIZE, secret_key, T2_KEY_ENCODED_LENGTH);
 	secret_key[T2_KEY_ENCODED_LENGTH] = '\0';
-
-	close(fd);
 }
 
 /**
